@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anton Gonzales | Fitness • Linux Cloud • Scripting</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            background-color: var(--dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        
+        nav a:hover {
+            color: var(--secondary);
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            padding: 3rem 0;
+        }
+        
+        .hero {
+            background-image: url('/api/placeholder/1200/400');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            padding: 6rem 0;
+            position: relative;
+            color: white;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        .card-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        .card-image2 {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            border-bottom: #2c3e50;
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .features {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .feature i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary);
+        }
+        
+        code {
+            background-color: #f7f7f7;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: monospace;
+            color: var(--accent);
+        }
+        
+        pre {
+            background-color: #f7f7f7;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-section {
+            background-color: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Anton Gonzales</h1>
+            <p>Fitness • Linux Cloud Solutions • Automation Scripting</p>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#fitness">Fitness</a></li>
+            <li><a href="#linux">Linux & Cloud</a></li>
+            <li><a href="#scripting">Scripting</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-content container">
+            <h1>Tech-Powered Fitness & Cloud Solutions</h1>
+            <p>Optimizing both physical performance and technical infrastructure</p>
+            <a href="#contact" class="btn">Get in Touch</a>
+        </div>
+    </section>
+    
+    <section id="about">
+        <div class="container">
+            <h2>About Anton</h2>
+            <p>Welcome to my digital space where tech meets fitness! I'm Anton Gonzales, a fitness enthusiast with a passion for Linux cloud solutions and automation scripting. With over a decade of experience in both domains, I help individuals and organizations optimize their physical performance and technical infrastructure.</p>
+            <p>My unique approach combines cutting-edge technology with proven fitness methodologies to create sustainable, data-driven solutions that deliver measurable results.</p>
+        </div>
+    </section>
+    
+    <section id="fitness" class="features">
+        <div class="container">
+            <h2>Fitness Programs</h2>
+            <p>Custom fitness routines powered by data analytics and smart tracking</p>
+            
+            <div class="feature-grid">
+                <div class="feature">
+                    <h3>Strength Training</h3>
+                    <p>Progressive overload techniques with automated tracking systems for optimal muscle development</p>
+                </div>
+                <div class="feature">
+                    <h3>HIIT Workouts</h3>
+                    <p>High-intensity interval training protocols optimized through performance metrics analysis</p>
+                </div>
+                <div class="feature">
+                    <h3>Nutrition Plans</h3>
+                    <p>Data-driven meal planning with automated calorie and macro tracking integrated with fitness goals</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="linux">
+        <div class="container">
+            <h2>Linux & Cloud Solutions</h2>
+            <p>Leveraging the power of open-source for scalable, secure cloud infrastructure</p>
+            
+            <div class="cards">
+                <div class="card">
+                    <div class="card-image" style="background-image: url('./images/cloud.jpg')"></div>
+                    <div class="card-content">
+                        <h3>Cloud Migration</h3>
+                        <p>Seamless transition to Linux-based cloud solutions with minimal downtime and maximum security</p>
+                        <pre><code>$ terraform apply -auto-approve</code></pre>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image" style="background-image: url('./images/iaas.jpg')"></div>
+                    <div class="card-content">
+                        <h3>Infrastructure as Code</h3>
+                        <p>Automated infrastructure deployment using Terraform, Ansible, and other IaC tools</p>
+                        <pre><code>$ ansible-playbook deploy.yml</code></pre>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-image" style="background-image: url('./images/container.jpg')"></div>
+                    <div class="card-content">
+                        <h3>Containerization</h3>
+                        <p>Docker and Kubernetes solutions for scalable, maintainable application deployment</p>
+                        <pre><code>$ kubectl apply -f deployment.yaml</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="scripting" class="features">
+        <div class="container">
+            <h2>Automation Scripting</h2>
+            <p>Powerful scripts to automate repetitive tasks and optimize workflows</p>
+            
+            <div class="feature-grid">
+                <div class="feature">
+                    <h3>Bash Scripting</h3>
+                    <p>Robust shell scripts for system administration and process automation</p>
+                    <pre><code>#!/bin/bash
+for file in *.log; do
+  gzip -9 "$file"
+done</code></pre>
+                </div>
+                <div class="feature">
+                    <h3>Python Automation</h3>
+                    <p>Versatile Python scripts for data processing and workflow automation</p>
+                    <pre><code>import pandas as pd
+
+def process_fitness_data(file):
+    df = pd.read_csv(file)
+    return df.groupby('workout').mean()</code></pre>
+                </div>
+                <div class="feature">
+                    <h3>CI/CD Pipelines</h3>
+                    <p>Automated testing and deployment pipelines for continuous integration/delivery</p>
+                    <pre><code>stages:
+  - build
+  - test
+  - deploy</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Optimize Your Fitness and Tech Stack?</h2>
+            <p>Let's combine the power of Linux, cloud solutions, and automation with data-driven fitness approaches</p>
+            <a href="#contact" class="btn">Schedule a Consultation</a>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <p>Ready to transform your fitness routine or optimize your cloud infrastructure? Reach out today!</p>
+            
+            <div class="cards">
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Contact Information</h3>
+                        <p>Email: info@antongonzales.com</p>
+                        <p>Phone: (555) 123-4567</p>
+                        <p>Office: Tech Fitness Hub, 123 Cloud Ave, Server City</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Office Hours</h3>
+                        <p>Monday - Friday: 9am - 6pm</p>
+                        <p>Saturday: 10am - 2pm (Fitness consultations only)</p>
+                        <p>Sunday: Closed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Anton Gonzales | Fitness • Linux Cloud • Scripting</p>
+            <div class="social-links">
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">GitHub</a>
+                <a href="#">YouTube</a>
+            </div>
+            <p>Powered by open-source technology and fitness science</p>
+        </div>
+    </footer>
+</body>
+</html>
